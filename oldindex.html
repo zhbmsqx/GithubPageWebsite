@@ -1,0 +1,1349 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<style>
+    body {
+        font: 10px sans-serif;
+    }
+
+    text {
+        fill: #000;
+    }
+
+        text.symbol {
+            fill: #000;
+        }
+
+    path {
+        fill: none;
+        stroke-width: 1;
+    }
+
+        path.candle {
+            stroke: #000000;
+        }
+
+            path.candle.body {
+                stroke-width: 0;
+            }
+
+            path.candle.down {
+                fill: #00AA00;
+                stroke: #00AA00;
+            }
+
+            path.candle.up {
+                fill: #FF0000;
+                stroke: #FF0000;
+            }
+
+    .close.annotation.up path {
+        fill: #00AA00;
+    }
+
+    path.volume {
+        fill: #DDDDDD;
+    }
+
+    .indicator-plot path.line {
+        fill: none;
+        stroke-width: 1;
+    }
+
+    .ma-0 path.line {
+        stroke: #1f77b4;
+    }
+
+    .ma-1 path.line {
+        stroke: #aec7e8;
+    }
+
+    .ma-2 path.line {
+        stroke: #ff7f0e;
+    }
+
+    button {
+        position: absolute;
+        right: 110px;
+        top: 25px;
+    }
+
+    path.macd {
+        stroke: #0000AA;
+    }
+
+    path.signal {
+        stroke: #FF9999;
+    }
+
+    path.zero {
+        stroke: #BBBBBB;
+        stroke-dasharray: 0;
+        stroke-opacity: 0.5;
+    }
+
+    path.difference {
+        fill: #BBBBBB;
+        opacity: 0.5;
+    }
+
+    path.rsi {
+        stroke: #000000;
+    }
+
+    path.overbought,
+    path.oversold {
+        stroke: #FF9999;
+        stroke-dasharray: 5, 5;
+    }
+
+    path.middle,
+    path.zero {
+        stroke: #BBBBBB;
+        stroke-dasharray: 5, 5;
+    }
+
+    .analysis path,
+    .analysis circle {
+        stroke: blue;
+        stroke-width: 0.8;
+    }
+
+    .trendline circle {
+        stroke-width: 0;
+        display: none;
+    }
+
+    .mouseover .trendline path {
+        stroke-width: 1.2;
+    }
+
+    .mouseover .trendline circle {
+        stroke-width: 1;
+        display: inline;
+    }
+
+    .dragging .trendline path,
+    .dragging .trendline circle {
+        stroke: darkblue;
+    }
+
+    .interaction path,
+    .interaction circle {
+        pointer-events: all;
+    }
+
+    .interaction .body {
+        cursor: move;
+    }
+
+    .trendlines .interaction .start,
+    .trendlines .interaction .end {
+        cursor: nwse-resize;
+    }
+
+    .supstance path {
+        stroke-dasharray: 2, 2;
+    }
+
+    .supstances .interaction path {
+        pointer-events: all;
+        cursor: ns-resize;
+    }
+
+    .mouseover .supstance path {
+        stroke-width: 1.5;
+    }
+
+    .dragging .supstance path {
+        stroke: darkblue;
+    }
+
+    .crosshair {
+        cursor: crosshair;
+    }
+
+        .crosshair path.wire {
+            stroke: #DDDDDD;
+            stroke-dasharray: 1, 1;
+        }
+
+        .crosshair .axisannotation path {
+            fill: #DDDDDD;
+        }
+
+    .tradearrow path.tradearrow {
+        stroke: none;
+    }
+
+    .tradearrow path.buy {
+        fill: #0000FF;
+    }
+
+    .tradearrow path.sell {
+        fill: #9900FF;
+    }
+
+    .tradearrow path.highlight {
+        fill: none;
+        stroke-width: 2;
+    }
+
+        .tradearrow path.highlight.buy {
+            stroke: #0000FF;
+        }
+
+        .tradearrow path.highlight.sell {
+            stroke: #9900FF;
+        }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>交易之王</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!--<link href="css/theme.default.min.css" rel="stylesheet">-->
+    <link href="css/theme.blue.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-latest.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.goodold.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.tablesorter.widgets.js"></script>-->
+
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="js/techan.min.js"></script>
+<!-- <script type="text/javascript"> -->
+	
+	<!-- $(function() { -->
+		<!-- $("suggestStockTbl").tablesorter() -->
+
+	<!-- }); -->
+    <!-- </script> -->
+    
+</head>
+
+<!--<body oncontextmenu="return false">-->
+<body>
+    <!--<h1>请输入你感兴趣的A股代码</h1>-->
+    <div id="indexes1" style="overflow:scroll;width:1000px;overflow:auto;text-align: center;margin: auto;">
+        <table>
+            <tr>
+                <td><b>A:</b></td>
+                <td onclick='updateData1("sh")' onmouseover='updateData1("sh")' bgcolor='green'><b>上证指数</b></td>
+                <td onclick='updateData1("sz")' onmouseover='updateData1("sz")' bgcolor='green'><b>深圳成指</b></td>
+                <td onclick='updateData1("hs300")' onmouseover='updateData1("hs300")' bgcolor='green'><b>沪深300</b></td>
+                <td onclick='updateData1("sz50")' onmouseover='updateData1("sz50")' bgcolor='red'><b>上证50</b></td>
+                <td onclick='updateData1("zxb")' onmouseover='updateData1("zxb")' bgcolor='green'><b>中小板</b></td>
+                <td onclick='updateData1("cyb")' onmouseover='updateData1("cyb")' bgcolor='green'><b>创业板</b></td>
+                <td onclick='updateData1("601939")' onmouseover='updateData1("601939")' bgcolor='green'><b>建设银行</b></td>
+            </tr>
+            <tr>
+                <td><b>美:</b></td>
+                <td onclick='updateData1("ixic")' onmouseover='updateData1("ixic")' bgcolor='green'><b>纳斯达克</b></td>
+                <td onclick='updateData1("dji")' onmouseover='updateData1("dji")' bgcolor='red'><b>道琼斯</b></td>
+                <td onclick='updateData1("gspc")' onmouseover='updateData1("gspc")' bgcolor='green'><b>标普</b></td>
+                <td onclick='updateData1("ftse")' onmouseover='updateData1("ftse")' bgcolor='green'><b>英国</b></td>
+                <td onclick='updateData1("rut")' onmouseover='updateData1("rut")' bgcolor='green'><b>RUT</b></td>
+                <td onclick='updateData1("aapl")' onmouseover='updateData1("aapl")' bgcolor='green'><b>苹果</b></td>
+                <td onclick='updateData1("amzn")' onmouseover='updateData1("amzn")' bgcolor='green'><b>亚马逊</b></td>
+                <td onclick='updateData1("msft")' onmouseover='updateData1("msft")' bgcolor='red'><b>微软</b></td>
+                <td onclick='updateData1("goog")' onmouseover='updateData1("goog")' bgcolor='green'><b>谷歌</b></td>
+                <td onclick='updateData1("bac")' onmouseover='updateData1("bac")' bgcolor='green'><b>BAC</b></td>
+                <td onclick='updateData1("bac")' onmouseover='updateData1("ashr")' bgcolor='green'><b>ASHR</b></td>
+                <td onclick='updateData1("chau")' onmouseover='updateData1("chad")' bgcolor='green'><b>CHAD</b></td>
+                <td onclick='updateData1("qqq")' onmouseover='updateData1("qqq")' bgcolor='green'><b>QQQ</b></td>
+                <td onclick='updateData1("psq")' onmouseover='updateData1("psq")' bgcolor='green'><b>PSQ</b></td>
+                <td onclick='updateData1("sh")' onmouseover='updateData1("sh")' bgcolor='green'><b>SH</b></td>
+            </tr>
+            <tr>
+                <td><b>美D:</b></td>
+                <td onclick='updateData1("ixicd")' onmouseover='updateData1("ixicd")' bgcolor='green'><b>纳斯达克</b></td>
+                <td onclick='updateData1("djid")' onmouseover='updateData1("djid")' bgcolor='green'><b>道琼斯</b></td>
+                <td onclick='updateData1("gspcd")' onmouseover='updateData1("gspcd")' bgcolor='green'><b>标普</b></td>
+                <td onclick='updateData1("ftsed")' onmouseover='updateData1("ftsed")' bgcolor='green'><b>英国</b></td>
+                <td onclick='updateData1("rutd")' onmouseover='updateData1("rutd")' bgcolor='green'><b>RUT</b></td>
+                <td onclick='updateData1("aapld")' onmouseover='updateData1("aapld")' bgcolor='green'><b>苹果</b></td>
+                <td onclick='updateData1("amznd")' onmouseover='updateData1("amznd")' bgcolor='green'><b>亚马逊</b></td>
+                <td onclick='updateData1("msftd")' onmouseover='updateData1("msftd")' bgcolor='green'><b>微软</b></td>
+                <td onclick='updateData1("googd")' onmouseover='updateData1("googd")' bgcolor='green'><b>谷歌</b></td>
+                <td onclick='updateData1("bacd")' onmouseover='updateData1("bacd")' bgcolor='green'><b>BAC</b></td>
+                <td onclick='updateData1("ashrd")' onmouseover='updateData1("ashrd")' bgcolor='green'><b>ASHR</b></td>
+                <td onclick='updateData1("chadd")' onmouseover='updateData1("chadd")' bgcolor='green'><b>CHAD</b></td>
+                <td onclick='updateData1("qqqd")' onmouseover='updateData1("qqqd")' bgcolor='green'><b>QQQ</b></td>
+                <td onclick='updateData1("psqd")' onmouseover='updateData1("psqd")' bgcolor='red'><b>PSQ</b></td>
+                <td onclick='updateData1("shd")' onmouseover='updateData1("shd")' bgcolor='green'><b>SH</b></td>
+            </tr>
+        </table>
+    </div>
+
+    <form autocomplete="off">
+        <div class="autocomplete" style="width:100%;text-align: center;">
+            <input id="suggest_top" type="text" name="suggest_top">
+            <input name="updateButton" type="button" value="查询股票" onclick="updateData()" />
+            <p>注释:表格内是周线数据每周五收盘更新，向上的箭头是买点，向下的箭头是卖点.</p>
+            
+        </div>
+    </form>
+
+    <div class="sinasuggestion">
+        <script type="text/javascript">
+            var SuggestServer = function() {
+                this._stringOriginalUrl = "http://suggest3.sinajs.cn/suggest/type=@TYPE@&key=@KEY@&name=@NAME@";
+                this._stringUrl = "";
+                this._elementScriptLoader = null;
+                this._elementContainer = null;
+                this._stringOriginalValue = "";
+                this._stringLastValue = "";
+                this._functionCallback = null;
+                this._elementLineCurrent = null;
+                this._objectHtml = {};
+                this._objectData = {};
+                this._booleanHideDelay = !1;
+                this._stringBrowserType = "";
+                this._objectType = {
+                    11: "Ashare",
+                    12: "B 股",
+                    13: "权证",
+                    14: "期货",
+                    15: "债券",
+                    21: "开基",
+                    22: "ETF",
+                    23: "LOF",
+                    24: "货基",
+                    25: "QDII",
+                    26: "封基",
+                    31: "港股",
+                    32: "窝轮",
+                    33: "港指数",
+                    41: "美股",
+                    42: "外期",
+                    81: "债券",
+                    82: "债券"
+                };
+                this._objectConfig = {
+                    input: null,
+                    loader: null,
+                    value: null,
+                    "default": null,
+                    type: 0,
+                    max: 10,
+                    width: 220,
+                    link: null,
+                    target: "_blank",
+                    head: ["option", "code", "name"],
+                    body: [-1, 2, 4],
+                    fix: {
+                        firefox: [1, 1]
+                    },
+                    onshow: function() {},
+                    onhide: function() {},
+                    hideSelectForIE6: !1,
+                    callback: null
+                };
+                this._getElement = function(a) {
+                    return document.getElementById(a)
+                };
+                this._getRandom = function() {
+                    return (new Date).getTime()
+                };
+                this._bind = function(a, b) {
+                    var c = this;
+                    return function() {
+                        var e, d = null;
+                        if ("undefined" != typeof b) {
+                            for (e = 0; e < arguments.length; e++) b.push(arguments[e]);
+                            d = b
+                        } else d = arguments;
+                        return a.apply(c, d)
+                    }
+                };
+                this._aevent = function(a, b, c) {
+                    window.addEventListener ? a.addEventListener(b, c, !1) : window.attachEvent && a.attachEvent("on" + b, c)
+                };
+                this._position = function() {
+                    var d, e, f, g, a = 0,
+                        b = 0,
+                        c = this._elementInput;
+                    //do {
+                    a += c.offsetTop || 0;
+                    b += c.offsetLeft || 0;
+                    //    if ("relative" != c.style.position) break;
+                    //    c = c.offsetParent
+                    //} while (c);
+                    d = [1 * this._elementInput.parentNode.style.borderTopWidth.replace("px", ""), 1 * this._elementInput.parentNode.style.borderLeftWidth.replace("px", "")];
+                    __arrayPositionFix = [0, 0];
+                    this._elementContainer.style.top != a + "px" && (this._elementContainer.style.top = a - d[0] + __arrayPositionFix[0] + "px");
+                    this._elementContainer.style.left != b + "px" && (this._elementContainer.style.left = b - d[1] + __arrayPositionFix[1] + "px");
+                    e = this._elementInput.style.borderTopWidth;
+                    f = this._elementInput.style.borderBottomWidth;
+                    g = this._elementInput.clientHeight;
+                    g += "" != e ? 1 * e.replace("px", "") : 2;
+                    g += "" != f ? 1 * f.replace("px", "") : 2;
+                    this._elementContainer.style.marginTop != g + "px" && (this._elementContainer.style.marginTop = g + "px")
+                };
+                this._getType = function(a) {
+                    return {
+                        1: "stock",
+                        2: "fund",
+                        3: "hk",
+                        4: "us"
+                    }[a.substr(0, 1)]
+                };
+                this._fill = function() {
+                    var b, c, d, e, f, g, h, i, j, a = this._elementInput.value;
+                    if ("key_" + a in this._objectData && "" != this._objectData["key_" + a]) {
+                        if (null == this._elementContainer) {
+                            this._elementContainer = document.createElement("div");
+                            this._elementContainer.style.cssText += "display:none; filter:alpha(opacity=95); opacity:0.95; position:absolute; width:" + this._objectConfig.width + "px; z-index:999;";
+                            this._elementInput.parentNode.insertBefore(this._elementContainer, this._elementInput);
+                            this._elementContainer.suggest = this
+                        }
+                        this._position();
+                        b = "";
+                        b += '<table style="border-collapse:collapse; line-height:18px; border:2px solid #EEE; background-color:#FFF; font-size:12px; text-align:center; color:#999; width:' + (this._objectConfig.width - 2) + 'px;">';
+                        if (null != this._objectConfig.head) {
+                            b += '<tr style="background-color:#F3F3F3;">';
+                            for (c in this._objectConfig.head) this._objectConfig.head.hasOwnProperty(c) && (b += "<td>" + this._objectConfig.head[c] + "</td>");
+                            b += "</tr>"
+                        }
+                        d = (this._objectData["key_" + a] || "").replace(/&amp;/g, "&").replace(/;$/, "").split(";");
+                        e = d.length > this._objectConfig.max ? this._objectConfig.max : d.length;
+                        f = "parentNode.parentNode.parentNode['suggest']";
+                        for (c = 0; e > c; c++) {
+                            g = d[c].split(",");
+                            g[-1] = g[0].replace(new RegExp(a.toLowerCase().replace(/(^\s*)|(\s*$)/g, "").replace(/\./g, function(a) {
+                                return "\\" + a
+                            }), "gi"), function(a) {
+                                return '<span style="color:#F00;">' + a + "</span>"
+                            });
+                            g[-2] = g[1] in this._objectType ? this._objectType[g[1]] : "――";
+                            if (null == this._objectConfig.link || "" == this._objectConfig.link) h = ['<td style="padding:0px;"><span style="display:block; padding:1px;">', "</span></td>"];
+                            else {
+                                i = this._objectConfig.link.replace(/@type@/g, this._getType(g[1]) || g[1]).replace(/@code@/g, this._getFullCode(g));
+                                for (j in g) g.hasOwnProperty(j) && (i = i.replace(new RegExp("@" + j + "@", "g"), g[j]));
+                                h = ['<td style="padding:0px;"><a href="' + i + '" hidefocus="true" onmousedown="return this.parentNode.parentNode.' + f + "['hidepause'](this);\" onclick=\"return this.parentNode.parentNode." + f + '[\'hideresume\'](this);" style="color:#999; display:block; outline:none; padding:1px; text-decoration:none; width:100%;" target="' + this._objectConfig.target + '">', "</a></td>"]
+                            }
+                            b += '<tr id="' + d[c] + '" style="cursor:pointer;" onmouseover="this.' + f + "['mouseoverLine'](this);\" onmouseout=\"this." + f + "['mouseoutLine'](this);\" onmousedown=\"this." + f + "['setLineMouse'](this);\">";
+                            for (j in this._objectConfig.body) this._objectConfig.body.hasOwnProperty(j) && (b += h[0] + g[this._objectConfig.body[j]] + h[1]);
+                            b += "</tr>"
+                        }
+                        b += "</table>";
+                        this._objectHtml["key_" + a] = b;
+                        this._elementLineCurrent = null;
+                        document.createElement("div");
+                        this._elementContainer.innerHTML = this._objectHtml["key_" + a];
+                        this._show()
+                    } else this._hide()
+                };
+                this._color = function(a) {
+                    var b = "";
+                    a._booleanArrow && a._booleanMouse ? b = "#F8FBDF" : a._booleanArrow ? b = "#F1F5FC" : a._booleanMouse && (b = "#FCFEDF");
+                    a.style.backgroundColor != b && (a.style.backgroundColor = b)
+                };
+                this.mouseoverLine = function(a) {
+                    a._booleanMouse = !0;
+                    this._color(a)
+                };
+                this.mouseoutLine = function(a) {
+                    a._booleanMouse = !1;
+                    this._color(a)
+                };
+                this.setLineMouse = function(a) {
+                    this.setLine(a);
+                    null != this._functionCallback && this._functionCallback(this._elementInput.value, a.id.split(","))
+                };
+                this._getFullCode = function(a) {
+                    switch (a[1]) {
+                        case "11":
+                            return a[3];
+                        case "12":
+                            return a[3];
+                        case "13":
+                            return a[3];
+                        case "14":
+                            return a[3];
+                        case "15":
+                            return a[3];
+                        case "21":
+                            return a[3];
+                        case "22":
+                            return a[3];
+                        case "23":
+                            return a[3];
+                        case "24":
+                            return a[3];
+                        case "25":
+                            return a[3];
+                        case "26":
+                            return a[3];
+                        default:
+                            return a[2]
+                    }
+                };
+                this.setLine = function(a) {
+                    var d, e, f, b = a.id.split(","),
+                        c = this._objectConfig.value;
+                    if (null != c && "" != c) {
+                        for (d = 0; d < b.length; d++) c = c.replace(new RegExp("@" + d + "@", "g"), b[d]);
+                        e = c
+                    } else e = this._getFullCode(b);
+                    f = a.id;
+                    for (d = 2; 5 > d; d++) this._objectData["key_" + b[d]] = f + ";";
+                    this._stringLastValue = e;
+                    this._elementInput.value = e;
+                    updateData();
+                    if (null != this._elementLineCurrent) {
+                        this._elementLineCurrent._booleanArrow = !1;
+                        this._color(this._elementLineCurrent)
+                    }
+                    a._booleanArrow = !0;
+                    this._color(a);
+                    this._elementLineCurrent = a
+                };
+                this._show = function() {
+                    var a, b;
+                    if (null != this._elementContainer) {
+                        this._elementContainer.style.display = "";
+                        this._objectConfig.onshow();
+                        if (this._objectConfig.hideSelectForIE6 && "ie6" == this._stringBrowserType) {
+                            a = document.getElementsByTagName("select");
+                            for (b = 0; b < a.length; b++) a[b].style.visibility = "hidden"
+                        }
+                    }
+                };
+                this.hidepause = function() {
+                    this._booleanHideDelay = !0
+                };
+                this.hideresume = function() {
+                    this._booleanHideDelay = !1;
+                    this._hideNow()
+                };
+                this._hide = function() {
+                    0 == this._booleanHideDelay && this._hideNow()
+                };
+                this._hideNow = function() {
+                    var a, b;
+                    if (null != this._elementContainer) {
+                        this._elementContainer.style.display = "none";
+                        this._objectConfig.onhide();
+                        if (this._objectConfig.hideSelectForIE6 && "ie6" == this._stringBrowserType) {
+                            a = document.getElementsByTagName("select");
+                            for (b = 0; b < a.length; b++) a[b].style.visibility = "visible"
+                        }
+                    }
+                };
+                this._load = function(a, b, c) {
+                    var d, e;
+                    if (null == this._elementScriptLoader) {
+                        this._elementScriptLoader = document.createElement("div");
+                        this._elementScriptLoader.style.display = "none";
+                        this._elementInput.parentNode.insertBefore(this._elementScriptLoader, this._elementInput)
+                    }
+                    d = "suggestdata_" + this._getRandom();
+                    e = document.createElement("script");
+                    e.type = "text/javascript";
+                    e.charset = "gb2312";
+                    e.src = this._stringUrl.replace("@NAME@", d).replace("@KEY@", encodeURIComponent(a.toLowerCase()));
+                    e._object = this;
+                    b && (e._functionCallbackTrue = b);
+                    c && (e._functionCallbackFalse = c);
+                    e._stringValue = a;
+                    e._stringName = d;
+                    e[document.all ? "onreadystatechange" : "onload"] = function() {
+                        if (!document.all || "loaded" == this.readyState || "complete" == this.readyState) {
+                            var a = window[this._stringName];
+                            if ("undefined" != typeof a) {
+                                this._object._objectData["key_" + this._stringValue] = a;
+                                this._functionCallbackTrue(a);
+                                window[this._stringName] = null
+                            } else this._functionCallbackFasle && this._functionCallbackFasle("");
+                            this._object = null;
+                            this._stringValue = null;
+                            this._stringName = null;
+                            this[document.all ? "onreadystatechange" : "onload"] = null;
+                            this.parentNode.removeChild(this)
+                        }
+                    };
+                    this._elementScriptLoader.appendChild(e)
+                };
+                this._check = function() {
+                    var a = this._elementInput.value;
+                    if (this._stringLastValue != a) {
+                        this._stringLastValue = a;
+                        if ("" != a) "key_" + a in this._objectData ? this._fill() : this._load(a, this._bind(this._fill), this._bind(this._hide));
+                        else {
+                            if (null != this._elementContainer) {
+                                this._elementLineCurrent = null;
+                                this._elementContainer.innerHTML = ""
+                            }
+                            this._hide()
+                        }
+                    } else this._show()
+                };
+                this._eventFocus = function() {
+                    this._elementInput.value == this._stringOriginalValue && (this._elementInput.value = "");
+                    this._stringLastValue = "";
+                    this._check()
+                };
+                this._eventBlur = function() {
+                    "" == this._elementInput.value && (this._elementInput.value = this._stringOriginalValue);
+                    this._stringLastValue = "";
+                    this._hide()
+                };
+                this._eventButtonUp = function() {
+                    updateData();
+                    var a = arguments[0] || window.event,
+                        b = null == this._objectConfig.head ? 0 : 1;
+                    switch (a.keyCode) {
+                        case 38:
+                            null != this._elementContainer && null != this._elementContainer.firstChild && this.setLine(this._elementContainer.firstChild.rows[this._elementLineCurrent && this._elementLineCurrent.rowIndex != b ? this._elementLineCurrent.rowIndex - 1 : this._elementContainer.firstChild.rows.length - 1]);
+                            break;
+                        case 40:
+                            null != this._elementContainer && null != this._elementContainer.firstChild && this.setLine(this._elementContainer.firstChild.rows[this._elementLineCurrent && this._elementLineCurrent.rowIndex != this._elementContainer.firstChild.rows.length - 1 ? this._elementLineCurrent.rowIndex + 1 : b]);
+                            break;
+                        case 13:
+
+                            //if (null != this._elementContainer) {
+                            //    null != this._elementLineCurrent && this.setLine(this._elementLineCurrent);
+                            //    null != this._functionCallback && this._functionCallback(this._elementInput.value, this._elementLineCurrent ? this._elementLineCurrent.id.split(",") : [])
+                            //}
+                            this._hide();
+                            break;
+                        default:
+                            this._check()
+                    }
+                };
+                this.getCodeFromCache = function(a) {
+                    return "key_" + a in this._objectData ? this._objectData["key_" + a] : void 0
+                };
+                this.getCode = function(a, b) {
+                    "key_" + a in this._objectData ? b(this._objectData["key_" + a]) : this._load(a, b, b)
+                };
+                this.changeType = function(a) {
+                    this._objectHtml = {};
+                    this._objectData = {};
+                    this._elementInput.value = this._stringOriginalValue;
+                    if ("undefined" != typeof a) {
+                        var b = "";
+                        switch (a.toLowerCase()) {
+                            case "stock":
+                                b = "11,12,13,14,15";
+                                break;
+                            case "fund":
+                                b = "21,22,23,24,25,26";
+                                break;
+                            case "hkstock":
+                                b = "31";
+                                break;
+                            case "hk":
+                                b = "31,33,32";
+                                break;
+                            case "usstock":
+                                b = "41";
+                                break;
+                            case "us":
+                                b = "41,42";
+                                break;
+                            default:
+                                b = a
+                        }
+                        this._stringUrl = this._stringOriginalUrl.replace("@TYPE@", b)
+                    } else this._stringUrl = this._stringOriginalUrl.replace("type=@TYPE@&", "");
+                    this._objectConfig.type = a
+                };
+                this.changeLink = function(a) {
+                    this._objectConfig.link = a;
+                    this._fill();
+                    this._hide()
+                };
+                this.clear = function() {
+                    this._stringLastValue = null;
+                    this._elementInput.value = "";
+                    this._check();
+                    this._elementInput.value = this._stringOriginalValue
+                };
+                this.bind = function(a) {
+                    if ("undefined" != typeof a)
+                        for (var b in a) this._objectConfig[b] = a[b];
+                    this._elementInput = "string" == typeof this._objectConfig.input ? document.getElementById(this._objectConfig.input) : this._objectConfig.input;
+                    null != this._objectConfig.loader && (this._elementScriptLoader = "string" == typeof this._objectConfig.loader ? document.getElementById(this._objectConfig.loader) : this._objectConfig.loader);
+                    if (this._elementInput) {
+                        this._stringOriginalValue = null == this._objectConfig["default"] || "" == this._objectConfig["default"] ? this._elementInput.value : this._objectConfig["default"];
+                        this.changeType(this._objectConfig.type);
+                        this._elementInput.value = this._stringOriginalValue;
+                        this._elementInput.setAttribute("autocomplete", "off");
+                        this._elementInput.autoComplete = "off";
+                        this._aevent(this._elementInput, "focus", this._bind(this._eventFocus));
+                        this._aevent(this._elementInput, "blur", this._bind(this._eventBlur));
+                        this._aevent(this._elementInput, "keyup", this._bind(this._eventButtonUp));
+                        this._aevent(this._elementInput, "mouseup", this._bind(this._eventButtonUp));
+                        this._functionCallback = this._objectConfig.callback
+                    }
+                }
+            };
+
+            var suggest0 = new SuggestServer();
+            suggest0.bind({
+                "input": "suggest_top", //*(必选) 指定suggest绑定的对象 [string|HTMLElement.input]
+                "value": "@2@",
+                //"loader": "suggestLoader", // 可指定js读取用的公共容器 [string|HTMLElement]
+                "default": "拼音/代码/名称", // 可指定input默认值 [string] 默认空
+                "type": "stock", // 类型 [string] 例如"stock"、"23"、"11,12"
+                //"link": "http://biz.finance.sina.com.cn/suggest/lookup_n.php?country=@type@&q=@code@", // 备选项点击的url 不设置则不可点击 [string]
+                //target : '_self',
+                "callback": null // 选定提示行时的回调方法，回调该方法时传入当前input内value [function|null]
+            });
+        </script>
+    </div>
+
+    <div id='chart'>
+
+        <!-- <svg style="width: 100%; height: 100%; outline: 1px solid green;"></svg> -->
+        <script>
+            var dim = {
+                width: 960,
+                height: 500,
+                margin: {
+                    top: 20,
+                    right: 50,
+                    bottom: 30,
+                    left: 50
+                },
+                ohlc: {
+                    height: 305
+                },
+                indicator: {
+                    height: 65,
+                    padding: 5
+                }
+            };
+            dim.plot = {
+                width: dim.width - dim.margin.left - dim.margin.right,
+                height: dim.height - dim.margin.top - dim.margin.bottom
+            };
+            dim.indicator.top = dim.ohlc.height + dim.indicator.padding;
+            dim.indicator.bottom = dim.indicator.top + dim.indicator.height + dim.indicator.padding;
+
+            var indicatorTop = d3.scaleLinear()
+                .range([dim.indicator.top, dim.indicator.bottom]);
+
+            var parseDate = d3.timeParse("%d-%b-%y");
+
+            var zoom = d3.zoom()
+                .on("zoom", zoomed);
+
+            var x = techan.scale.financetime()
+                .range([0, dim.plot.width]);
+
+            var y = d3.scaleLinear()
+                .range([dim.ohlc.height, 0]);
+
+            var yPercent = y.copy(); // Same as y at this stage, will get a different domain later
+
+            var yInit, yPercentInit, zoomableInit;
+
+            var yVolume = d3.scaleLinear()
+                .range([y(0), y(0.2)]);
+
+            var candlestick = techan.plot.candlestick()
+                .xScale(x)
+                .yScale(y);
+
+            var tradearrow = techan.plot.tradearrow()
+                .xScale(x)
+                .yScale(y)
+                .y(function(d) {
+                    // Display the buy and sell arrows a bit above and below the price, so the price is still visible
+                    if (d.type === 'buy') return y(d.low) + 5;
+                    if (d.type === 'sell') return y(d.high) - 5;
+                    else return y(d.price);
+                });
+
+            var sma0 = techan.plot.sma()
+                .xScale(x)
+                .yScale(y);
+
+            var sma1 = techan.plot.sma()
+                .xScale(x)
+                .yScale(y);
+
+            var ema2 = techan.plot.ema()
+                .xScale(x)
+                .yScale(y);
+
+            var volume = techan.plot.volume()
+                .accessor(candlestick.accessor()) // Set the accessor to a ohlc accessor so we get highlighted bars
+                .xScale(x)
+                .yScale(yVolume);
+
+            var trendline = techan.plot.trendline()
+                .xScale(x)
+                .yScale(y);
+
+            var supstance = techan.plot.supstance()
+                .xScale(x)
+                .yScale(y);
+
+            var xAxis = d3.axisBottom(x);
+
+            var timeAnnotation = techan.plot.axisannotation()
+                .axis(xAxis)
+                .orient('bottom')
+                .format(d3.timeFormat('%Y-%m-%d'))
+                .width(65)
+                .translate([0, dim.plot.height]);
+
+            var yAxis = d3.axisRight(y);
+
+            var ohlcAnnotation = techan.plot.axisannotation()
+                .axis(yAxis)
+                .orient('right')
+                .format(d3.format(',.2f'))
+                .translate([x(1), 0]);
+
+            var closeAnnotation = techan.plot.axisannotation()
+                .axis(yAxis)
+                .orient('right')
+                .accessor(candlestick.accessor())
+                .format(d3.format(',.2f'))
+                .translate([x(1), 0]);
+
+            var percentAxis = d3.axisLeft(yPercent)
+                .tickFormat(d3.format('+.1%'));
+
+            var percentAnnotation = techan.plot.axisannotation()
+                .axis(percentAxis)
+                .orient('left');
+
+            var volumeAxis = d3.axisRight(yVolume)
+                .ticks(3)
+                .tickFormat(d3.format(",.3s"));
+
+            var volumeAnnotation = techan.plot.axisannotation()
+                .axis(volumeAxis)
+                .orient("right")
+                .width(35);
+
+            var macdScale = d3.scaleLinear()
+                .range([indicatorTop(0) + dim.indicator.height, indicatorTop(0)]);
+
+            var rsiScale = macdScale.copy()
+                .range([indicatorTop(1) + dim.indicator.height, indicatorTop(1)]);
+
+            var macd = techan.plot.macd()
+                .xScale(x)
+                .yScale(macdScale);
+
+            var macdAxis = d3.axisRight(macdScale)
+                .ticks(3);
+
+            var macdAnnotation = techan.plot.axisannotation()
+                .axis(macdAxis)
+                .orient("right")
+                .format(d3.format(',.2f'))
+                .translate([x(1), 0]);
+
+            var macdAxisLeft = d3.axisLeft(macdScale)
+                .ticks(3);
+
+            var macdAnnotationLeft = techan.plot.axisannotation()
+                .axis(macdAxisLeft)
+                .orient("left")
+                .format(d3.format(',.2f'));
+
+            var rsi = techan.plot.rsi()
+                .xScale(x)
+                .yScale(rsiScale);
+
+            var rsiAxis = d3.axisRight(rsiScale)
+                .ticks(3);
+
+            var rsiAnnotation = techan.plot.axisannotation()
+                .axis(rsiAxis)
+                .orient("right")
+                .format(d3.format(',.2f'))
+                .translate([x(1), 0]);
+
+            var rsiAxisLeft = d3.axisLeft(rsiScale)
+                .ticks(3);
+
+            var rsiAnnotationLeft = techan.plot.axisannotation()
+                .axis(rsiAxisLeft)
+                .orient("left")
+                .format(d3.format(',.2f'));
+
+            var ohlcCrosshair = techan.plot.crosshair()
+                .xScale(timeAnnotation.axis().scale())
+                .yScale(ohlcAnnotation.axis().scale())
+                .xAnnotation(timeAnnotation)
+                .yAnnotation([ohlcAnnotation, percentAnnotation, volumeAnnotation])
+                .verticalWireRange([0, dim.plot.height]);
+
+            var macdCrosshair = techan.plot.crosshair()
+                .xScale(timeAnnotation.axis().scale())
+                .yScale(macdAnnotation.axis().scale())
+                .xAnnotation(timeAnnotation)
+                .yAnnotation([macdAnnotation, macdAnnotationLeft])
+                .verticalWireRange([0, dim.plot.height]);
+
+            var rsiCrosshair = techan.plot.crosshair()
+                .xScale(timeAnnotation.axis().scale())
+                .yScale(rsiAnnotation.axis().scale())
+                .xAnnotation(timeAnnotation)
+                .yAnnotation([rsiAnnotation, rsiAnnotationLeft])
+                .verticalWireRange([0, dim.plot.height]);
+
+            var svg = d3.select("#chart").append("svg")
+                .attr("width", dim.width)
+                .attr("height", dim.height);
+
+            var defs = svg.append("defs");
+
+            defs.append("clipPath")
+                .attr("id", "ohlcClip")
+                .append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", dim.plot.width)
+                .attr("height", dim.ohlc.height);
+
+            defs.selectAll("indicatorClip").data([0, 1])
+                .enter()
+                .append("clipPath")
+                .attr("id", function(d, i) {
+                    return "indicatorClip-" + i;
+                })
+                .append("rect")
+                .attr("x", 0)
+                .attr("y", function(d, i) {
+                    return indicatorTop(i);
+                })
+                .attr("width", dim.plot.width)
+                .attr("height", dim.indicator.height);
+
+            svg = svg.append("g")
+                .attr("transform", "translate(" + dim.margin.left + "," + dim.margin.top + ")");
+
+            svg.append('text')
+                .attr("id", "symbolText")
+                .attr("class", "symbol")
+                .attr("x", 20)
+                .text("上证指数交易提示");
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + dim.plot.height + ")");
+
+            var ohlcSelection = svg.append("g")
+                .attr("class", "ohlc")
+                .attr("transform", "translate(0,0)");
+
+            ohlcSelection.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + x(1) + ",0)")
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", -12)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Price ($)");
+
+            ohlcSelection.append("g")
+                .attr("class", "close annotation up");
+
+            ohlcSelection.append("g")
+                .attr("class", "volume")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            ohlcSelection.append("g")
+                .attr("class", "candlestick")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            ohlcSelection.append("g")
+                .attr("class", "indicator sma ma-0")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            ohlcSelection.append("g")
+                .attr("class", "indicator sma ma-1")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            ohlcSelection.append("g")
+                .attr("class", "indicator ema ma-2")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            ohlcSelection.append("g")
+                .attr("class", "percent axis");
+
+            ohlcSelection.append("g")
+                .attr("class", "volume axis");
+
+            var indicatorSelection = svg.selectAll("svg > g.indicator").data(["macd", "rsi"]).enter()
+                .append("g")
+                .attr("class", function(d) {
+                    return d + " indicator";
+                });
+
+            indicatorSelection.append("g")
+                .attr("class", "axis right")
+                .attr("transform", "translate(" + x(1) + ",0)");
+
+            indicatorSelection.append("g")
+                .attr("class", "axis left")
+                .attr("transform", "translate(" + x(0) + ",0)");
+
+            indicatorSelection.append("g")
+                .attr("class", "indicator-plot")
+                .attr("clip-path", function(d, i) {
+                    return "url(#indicatorClip-" + i + ")";
+                });
+
+            // Add trendlines and other interactions last to be above zoom pane
+            svg.append('g')
+                .attr("class", "crosshair ohlc");
+
+            svg.append("g")
+                .attr("class", "tradearrow")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            svg.append('g')
+                .attr("class", "crosshair macd");
+
+            svg.append('g')
+                .attr("class", "crosshair rsi");
+
+            svg.append("g")
+                .attr("class", "trendlines analysis")
+                .attr("clip-path", "url(#ohlcClip)");
+            svg.append("g")
+                .attr("class", "supstances analysis")
+                .attr("clip-path", "url(#ohlcClip)");
+
+            d3.select("button").on("click", updateData);
+            
+            d3.csv("StockData\\sh.csv", function(error, data1) {
+                var accessor = candlestick.accessor(),
+                    indicatorPreRoll = 33; // Don't show where indicators don't have data
+
+                data = data1.map(function(d) {
+                    return {
+                        date: parseDate(d.Date),
+                        open: +d.Open,
+                        high: +d.High,
+                        low: +d.Low,
+                        close: +d.Close,
+                        volume: +d.Volume,
+                        bssignal: +d.BuySell,
+                    };
+                }).sort(function(a, b) {
+                    return d3.ascending(accessor.d(a), accessor.d(b));
+                });
+
+                x.domain(techan.scale.plot.time(data).domain());
+                y.domain(techan.scale.plot.ohlc(data.slice(indicatorPreRoll)).domain());
+                yPercent.domain(techan.scale.plot.percent(y, accessor(data[indicatorPreRoll])).domain());
+                yVolume.domain(techan.scale.plot.volume(data).domain());
+
+                trades = data1.filter(function(d) {
+                    if (d.BuySell == 1 || d.BuySell == -1) {
+                        return true;
+                    }
+                    return false;
+                }).map(function(d) {
+                    var type = "";
+                    if (d.BuySell == 1) {
+                        return {
+                            date: parseDate(d.Date),
+                            type: "buy",
+                            price: d.Low,
+                            low: d.Low,
+                            high: d.High
+                        };
+                    } else {
+                        return {
+                            date: parseDate(d.Date),
+                            type: "sell",
+                            price: d.High,
+                            low: d.Low,
+                            high: d.High
+                        };
+                    }
+                }).sort(function(a, b) {
+                    return d3.ascending(accessor.d(a), accessor.d(b));
+                });
+
+                var macdData = techan.indicator.macd()(data);
+                macdScale.domain(techan.scale.plot.macd(macdData).domain());
+                var rsiData = techan.indicator.rsi()(data);
+                rsiScale.domain(techan.scale.plot.rsi(rsiData).domain());
+
+                svg.select("g.candlestick").datum(data).call(candlestick);
+                svg.select("g.close.annotation").datum([data[data.length - 1]]).call(closeAnnotation);
+                svg.select("g.volume").datum(data).call(volume);
+                svg.select("g.sma.ma-0").datum(techan.indicator.sma().period(10)(data)).call(sma0);
+                svg.select("g.sma.ma-1").datum(techan.indicator.sma().period(20)(data)).call(sma1);
+                svg.select("g.ema.ma-2").datum(techan.indicator.ema().period(54)(data)).call(ema2);
+                svg.select("g.macd .indicator-plot").datum(macdData).call(macd);
+                svg.select("g.rsi .indicator-plot").datum(rsiData).call(rsi);
+
+                svg.select("g.crosshair.ohlc").call(ohlcCrosshair).call(zoom);
+                svg.select("g.crosshair.macd").call(macdCrosshair).call(zoom);
+                svg.select("g.crosshair.rsi").call(rsiCrosshair).call(zoom);
+                svg.select("g.tradearrow").datum(trades).call(tradearrow);
+
+                // Stash for zooming
+                zoomableInit = x.zoomable().domain([indicatorPreRoll, data.length]).copy(); // Zoom in a little to hide indicator preroll
+                yInit = y.copy();
+                yPercentInit = yPercent.copy();
+
+                draw();
+            });
+
+            function updateData() {
+                var searchValue = document.getElementById("suggest_top").value;
+
+                updateData1(searchValue);
+            }
+
+            function updateData1(searchValue) {
+                var folder = "StockData\\";
+
+                d3.csv(folder.concat(searchValue).concat(".csv"), function(error, data1) {
+
+                    var accessor = candlestick.accessor(),
+                        indicatorPreRoll = 33; // Don't show where indicators don't have data
+
+                    data = data1.map(function(d) {
+                        return {
+                            date: parseDate(d.Date),
+                            open: +d.Open,
+                            high: +d.High,
+                            low: +d.Low,
+                            close: +d.Close,
+                            volume: +d.Volume,
+                            bssignal: +d.BuySell,
+                        };
+                    }).sort(function(a, b) {
+                        return d3.ascending(accessor.d(a), accessor.d(b));
+                    });
+
+                    x.domain(techan.scale.plot.time(data).domain());
+                    y.domain(techan.scale.plot.ohlc(data.slice(indicatorPreRoll)).domain());
+                    yPercent.domain(techan.scale.plot.percent(y, accessor(data[indicatorPreRoll])).domain());
+                    yVolume.domain(techan.scale.plot.volume(data).domain());
+
+                    trades = data1.filter(function(d) {
+                        if (d.BuySell == 1 || d.BuySell == -1) {
+                            return true;
+                        }
+
+                        return false;
+                    }).map(function(d) {
+
+                        var type = "";
+
+                        if (d.BuySell == 1) {
+                            return {
+                                date: parseDate(d.Date),
+                                type: "buy",
+                                price: d.Low,
+                                low: d.Low,
+                                high: d.High
+                            };
+                        } else {
+                            return {
+                                date: parseDate(d.Date),
+                                type: "sell",
+                                price: d.High,
+                                low: d.Low,
+                                high: d.High
+                            };
+                        }
+                    }).sort(function(a, b) {
+                        return d3.ascending(accessor.d(a), accessor.d(b));
+                    });
+
+                    var macdData = techan.indicator.macd()(data);
+                    macdScale.domain(techan.scale.plot.macd(macdData).domain());
+                    var rsiData = techan.indicator.rsi()(data);
+                    rsiScale.domain(techan.scale.plot.rsi(rsiData).domain());
+
+                    svg.select("g.candlestick").datum(data).call(candlestick);
+                    svg.select("g.close.annotation").datum([data[data.length - 1]]).call(closeAnnotation);
+                    svg.select("g.volume").datum(data).call(volume);
+                    svg.select("g.sma.ma-0").datum(techan.indicator.sma().period(10)(data)).call(sma0);
+                    svg.select("g.sma.ma-1").datum(techan.indicator.sma().period(20)(data)).call(sma1);
+                    svg.select("g.ema.ma-2").datum(techan.indicator.ema().period(54)(data)).call(ema2);
+                    svg.select("g.macd .indicator-plot").datum(macdData).call(macd);
+                    svg.select("g.rsi .indicator-plot").datum(rsiData).call(rsi);
+
+                    svg.select("g.crosshair.ohlc").call(ohlcCrosshair).call(zoom);
+                    svg.select("g.crosshair.macd").call(macdCrosshair).call(zoom);
+                    svg.select("g.crosshair.rsi").call(rsiCrosshair).call(zoom);
+
+                    svg.select("g.tradearrow").datum(trades).call(tradearrow);
+
+                    // Stash for zooming
+                    zoomableInit = x.zoomable().domain([indicatorPreRoll, data.length]).copy(); // Zoom in a little to hide indicator preroll
+                    yInit = y.copy();
+                    yPercentInit = yPercent.copy();
+
+                    draw();
+                });
+
+                var updatedTextValue = searchValue;
+
+                if (searchValue == 'sh')
+                {
+                    updatedTextValue = "上证指数"
+                }
+                else if (searchValue == 'sz') {
+                    updatedTextValue = "深圳成指"
+                }
+                else if (searchValue == 'hs300') {
+                    updatedTextValue = "沪深300指数"
+                }
+                else if (searchValue == 'sz50') {
+                    updatedTextValue = "上证50指数"
+                }
+                else if (searchValue == 'zxb') {
+                    updatedTextValue = "中小板指数"
+                }
+                else if (searchValue == 'cyb') {
+                    updatedTextValue = "创业板指数"
+                }
+
+                document.getElementById('symbolText').textContent = updatedTextValue + "交易提示";
+            }
+
+            function zoomed() {
+                x.zoomable().domain(d3.event.transform.rescaleX(zoomableInit).domain());
+                y.domain(d3.event.transform.rescaleY(yInit).domain());
+                yPercent.domain(d3.event.transform.rescaleY(yPercentInit).domain());
+
+                draw();
+            }
+
+            function draw() {
+                svg.select("g.x.axis").call(xAxis);
+                svg.select("g.ohlc .axis").call(yAxis);
+                svg.select("g.volume.axis").call(volumeAxis);
+                svg.select("g.percent.axis").call(percentAxis);
+                svg.select("g.macd .axis.right").call(macdAxis);
+                svg.select("g.rsi .axis.right").call(rsiAxis);
+                svg.select("g.macd .axis.left").call(macdAxisLeft);
+                svg.select("g.rsi .axis.left").call(rsiAxisLeft);
+
+                // We know the data does not change, a simple refresh that does not perform data joins will suffice.
+                svg.select("g.candlestick").call(candlestick.refresh);
+                svg.select("g.close.annotation").call(closeAnnotation.refresh);
+                svg.select("g.volume").call(volume.refresh);
+                svg.select("g .sma.ma-0").call(sma0.refresh);
+                svg.select("g .sma.ma-1").call(sma1.refresh);
+                svg.select("g .ema.ma-2").call(ema2.refresh);
+                svg.select("g.macd .indicator-plot").call(macd.refresh);
+                svg.select("g.rsi .indicator-plot").call(rsi.refresh);
+                svg.select("g.crosshair.ohlc").call(ohlcCrosshair.refresh);
+                svg.select("g.crosshair.macd").call(macdCrosshair.refresh);
+                svg.select("g.crosshair.rsi").call(rsiCrosshair.refresh);
+                svg.select("g.trendlines").call(trendline.refresh);
+                svg.select("g.supstances").call(supstance.refresh);
+                svg.select("g.tradearrow").call(tradearrow.refresh);
+            }
+        </script>
+
+    </div>
+
+    <p>最新的买入信号股票名称（点击每一行可以获取股票的走向图）</p>
+
+    <div id="suggestStock" style="overflow:scroll;height:300px;width:800px;overflow:auto;text-align: center;margin: auto;">
+
+        <script>
+            loadData();
+            $("#suggestStockTbl").tablesorter({
+                widgets: ['zebra', 'columns'],
+                usNumberFormat : false,
+                sortReset      : true,
+                sortRestart    : true,
+
+                theme: 'blue',
+
+                //// hidden filter input/selects will resize the columns, so try to minimize the change
+                //widthFixed: true,
+
+                //ignoreCase: true,
+
+
+            });
+            
+            function loadData() {
+                var rawFile = new XMLHttpRequest();
+                rawFile.open("GET", "SignalData\\signal.csv", false);
+                rawFile.overrideMimeType('text/xml; charset=GB_2312-80');
+                var allText = null;
+                rawFile.onreadystatechange = function () {
+                    if (rawFile.readyState === 4) {
+                        if (rawFile.status === 200 || rawFile.status == 0) {
+                            allText = rawFile.responseText;
+                        }
+                    }
+                }
+                rawFile.send(null);
+
+                var allTextLines = allText.split(/\r\n|\n/);
+                var headers = allTextLines[0].split('\t');
+                var lines = [];
+                var tableElem = document.createElement('TABLE');
+                tableElem.id = "suggestStockTbl";
+
+                var tableHeader = document.createElement("THEAD");
+                tableElem.appendChild(tableHeader);
+                var tableRow = document.createElement("TR");
+                tableHeader.appendChild(tableRow);
+
+                for (var h = 0; h < headers.length; h++) {
+                    var cell = tableRow.insertCell(h);
+                    cell.outerHTML = "<th><b>" + headers[h] + "</b></th>";
+                }
+                
+                var tableBody = tableElem.createTBody();
+
+                for (var i = 1; i < allTextLines.length; i++) {
+
+                    rowElem = document.createElement('tr');
+
+                    var data = allTextLines[i].split('\t');
+                    if (data.length == headers.length) {
+
+                        var tarr = [];
+                        for (var j = 0; j < headers.length; j++) {
+                            colElem = document.createElement('td');
+                            colElem.appendChild(document.createTextNode(data[j])); //to print cell number
+                            
+                            rowElem.appendChild(colElem);
+                        }
+
+                        rowElem.onclick = function (myrow) {
+                            return function () {
+                                var cell = myrow.getElementsByTagName("td")[1];
+                                var id = cell.innerHTML;
+                                updateData1(id);
+                            };
+                        }(rowElem);
+                        
+                    }
+                    
+                    tableBody.appendChild(rowElem);
+                }
+
+                $('#suggestStock').append(tableElem);
+            }
+        </script>
+    </div>
+
+    <div align=center>
+        <!--<p>咨询/商业合作请加微信：H13707310726，或者发邮件到178stock@gmail.com</p>-->
+        <a>网站总计访问量<img src='https://www.counter12.com/img-x76cWzC3BCBb8x8C-21.gif' border='0' alt='web counter free'></a>
+        <script type='text/javascript' src='https://www.counter12.com/ad.js?id=x76cWzC3BCBb8x8C'></script>
+    </div>
+
+</body>
+
+</html>
