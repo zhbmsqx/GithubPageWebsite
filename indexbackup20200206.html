@@ -213,8 +213,6 @@
 
     <script src="js/d3.v4.min.js"></script>
     <script src="js/techan.min.js"></script>
-
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 
 <!--<body oncontextmenu="return false">-->
@@ -223,29 +221,29 @@
     <div id="indexes1" style="overflow:scroll;width:1100px;overflow:auto;text-align: center;margin: auto;">
         <table>
 <tr>
-<td onclick='updateData1("sh")' onmouseover='updateData1("sh")' bgcolor="lightcoral"><b>上证指数</b></td>
-<td onclick='updateData1("sz50")' onmouseover='updateData1("sz50")' bgcolor="lightcoral"><b>上证50</b></td>
-<td onclick='updateData1("sz")' onmouseover='updateData1("sz")' bgcolor="lightcoral"><b>深圳指数</b></td>
-<td onclick='updateData1("hs300")' onmouseover='updateData1("hs300")' bgcolor="lightcoral"><b>沪深300</b></td>
+<td onclick='updateData1("sh")' onmouseover='updateData1("sh")' bgcolor="green"><b>上证指数</b></td>
+<td onclick='updateData1("sz50")' onmouseover='updateData1("sz50")' bgcolor="green"><b>上证50</b></td>
+<td onclick='updateData1("sz")' onmouseover='updateData1("sz")' bgcolor="green"><b>深圳指数</b></td>
+<td onclick='updateData1("hs300")' onmouseover='updateData1("hs300")' bgcolor="green"><b>沪深300</b></td>
 <td onclick='updateData1("zxb")' onmouseover='updateData1("zxb")' bgcolor="lightcoral"><b>中小板</b></td>
 <td onclick='updateData1("cyb")' onmouseover='updateData1("cyb")' bgcolor="lightcoral"><b>创业板</b></td>
 <td onclick='updateData1("601939")' onmouseover='updateData1("601939")' bgcolor="green"><b>建行</b></td>
 <td onclick='updateData1("000002")' onmouseover='updateData1("000002")' bgcolor="green"><b>万科</b></td>
-<td onclick='updateData1("601318")' onmouseover='updateData1("601318")' bgcolor="lightcoral"><b>平安</b></td>
-<td onclick='updateData1("600519")' onmouseover='updateData1("600519")' bgcolor="lightcoral"><b>茅台</b></td>
+<td onclick='updateData1("601318")' onmouseover='updateData1("601318")' bgcolor="green"><b>平安</b></td>
+<td onclick='updateData1("600519")' onmouseover='updateData1("600519")' bgcolor="green"><b>茅台</b></td>
 <td onclick='updateData1("000651")' onmouseover='updateData1("000651")' bgcolor="green"><b>格力</b></td>
-<td onclick='updateData1("601111")' onmouseover='updateData1("601111")' bgcolor="lightcoral"><b>国航</b></td>
-<td onclick='updateData1("^dji")' onmouseover='updateData1("^dji")' bgcolor="lightcoral"><b>Dow</b></td>
-<td onclick='updateData1("^gspc")' onmouseover='updateData1("^gspc")' bgcolor="lightcoral"><b>SP500</b></td>
+<td onclick='updateData1("601111")' onmouseover='updateData1("601111")' bgcolor="green"><b>国航</b></td>
+<td onclick='updateData1("^dji")' onmouseover='updateData1("^dji")' bgcolor="green"><b>Dow</b></td>
+<td onclick='updateData1("^gspc")' onmouseover='updateData1("^gspc")' bgcolor="green"><b>SP500</b></td>
 <td onclick='updateData1("^ixic")' onmouseover='updateData1("^ixic")' bgcolor="lightcoral"><b>Nasdaq</b></td>
-<td onclick='updateData1("^rut")' onmouseover='updateData1("^rut")' bgcolor="lightcoral"><b>RUT2000</b></td>
-<td onclick='updateData1("^hsi")' onmouseover='updateData1("^hsi")' bgcolor="lightcoral"><b>HSI</b></td>
-<td onclick='updateData1("docu")' onmouseover='updateData1("docu")' bgcolor="green"><b>DOCU</b></td>
+<td onclick='updateData1("^rut")' onmouseover='updateData1("^rut")' bgcolor="green"><b>RUT2000</b></td>
+<td onclick='updateData1("^hsi")' onmouseover='updateData1("^hsi")' bgcolor="green"><b>HSI</b></td>
+<td onclick='updateData1("docu")' onmouseover='updateData1("docu")' bgcolor="lightcoral"><b>DOCU</b></td>
 <td onclick='updateData1("aapl")' onmouseover='updateData1("aapl")' bgcolor="lightcoral"><b>Apple</b></td>
 <td onclick='updateData1("amzn")' onmouseover='updateData1("amzn")' bgcolor="lightcoral"><b>Amazon</b></td>
  </tr>
 <tr>
-<td onclick='updateData1("msft")' onmouseover='updateData1("msft")' bgcolor="green"><b>Microsoft</b></td>
+<td onclick='updateData1("msft")' onmouseover='updateData1("msft")' bgcolor="lightcoral"><b>Microsoft</b></td>
 <td onclick='updateData1("goog")' onmouseover='updateData1("goog")' bgcolor="lightcoral"><b>Google</b></td>
 <td onclick='updateData1("cichy")' onmouseover='updateData1("cichy")' bgcolor="green"><b>CICHY</b></td>
 <td onclick='updateData1("jpm")' onmouseover='updateData1("jpm")' bgcolor="green"><b>JPM</b></td>
@@ -261,12 +259,8 @@
 <td onclick='updateData1("srty")' onmouseover='updateData1("srty")' bgcolor="green"><b>SRTY</b></td>
 <td onclick='updateData1("sqqq")' onmouseover='updateData1("sqqq")' bgcolor="green"><b>SQQQ</b></td>
 <td onclick='updateData1("tvix")' onmouseover='updateData1("tvix")' bgcolor="green"><b>TVIX</b></td>
-<td onclick='updateData1("khc")' onmouseover='updateData1("khc")' bgcolor="lightcoral"><b>KHC</b></td>
-<td onclick='updateData1("dal")' onmouseover='updateData1("dal")' bgcolor="green"><b>DAL</b></td>
-<td onclick='updateData1("ba")' onmouseover='updateData1("ba")' bgcolor="green"><b>BA</b></td>
-<td onclick='updateData1("BRK-B")' onmouseover='updateData1("BRK-B")' bgcolor="green"><b>BRKB</b></td>
-<td onclick='loadTableSorter("latest")'><b>最新</b></td>
-<td onclick='loadTableSorter()'><b>所有</b></td>
+<td onclick='loadTableSorter("latest")'><b>加载最新</b></td>
+<td onclick='loadTableSorter()'><b>加载所有</b></td>
  </tr>
         </table>
     </div>
@@ -1148,12 +1142,7 @@
     <div id="suggestStock">
 
         <script>
-            var loaded = false;
-
             function loadTableSorter(option) {
-
-                if (loaded) return;
-                loaded = true;
 
                 loadData(option);
 
@@ -1196,6 +1185,11 @@
                     var allTextLines = allText.split(/\r\n|\n/);
                     var headers = allTextLines[0].split('\t');
                     var lines = [];
+
+                    if (document.contains(document.getElementById("suggestStockTbl"))) {
+                        document.getElementById("suggestStockTbl").remove();
+                    }
+
                     var tableElem = document.createElement('TABLE');
                     tableElem.id = "suggestStockTbl";
                     tableElem.class = "tablesorter";
@@ -1249,7 +1243,7 @@
     <div align=center>
         <script type='text/javascript' src='https://www.counter12.com/ad.js?id=x76cWzC3BCBb8x8C'></script>
         <a>
-最后更新时间:8/3/2020 5:59:27 PM
+最后更新时间(UTC):2/6/2020 7:13:03 PM, 网站总计访问量<img src='https://www.counter12.com/img-x76cWzC3BCBb8x8C-21.gif' border='0' alt='web counter free'>
         </a>
     </div>
 
