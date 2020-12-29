@@ -1,5 +1,5 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	MSFT	MSFT		0.00	0.00	0.00	No	2	225.33	18	Yes	Yes	8	0.14	218.59	1.03
-0.00	AMZN	AMZN		0.00	0.00	0.00	No	2	3291.74	8	Yes	Yes	2	0.30	3201.65	1.03
+0.00	AMZN	AMZN		0.00	0.00	0.00	No	2	3322.00	18	Yes	Yes	8	0.46	3201.65	1.04
+0.00	MSFT	MSFT		0.00	0.00	0.00	No	2	224.15	18	Yes	Yes	8	0.23	218.59	1.03
 0.00	ZXB	zxb		0.00	0.00	0.00	No	1	9260.93	1	Yes	Yes	0	1.20	9343.21	0.99
 0.00	CYB	cyb		0.00	0.00	0.00	No	1	2813.00	1	Yes	Yes	0	0.73	2840.80	0.99
