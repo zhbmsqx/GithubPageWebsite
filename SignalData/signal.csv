@@ -10,5 +10,5 @@ H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	S
 0.00	MSFT	MSFT		0.00	0.00	0.00	Yes	6	231.96	428	Yes	Yes	22	1.77	218.59	1.06
 0.00	^GSPC	SP500		0.00	0.00	0.00	No	12	3714.24	1	Yes	Yes	0	1.53	3509.44	1.06
 0.00	601939	jsyh		0.00	0.00	0.00	No	2	6.76	8	Yes	Yes	2	1.16	6.69	1.01
-0.00	BRK-B	BRK-B		0.00	0.00	0.00	No	3	227.87	1	Yes	Yes	0	1.17	234.03	0.97
+0.00	BRK-B	BRK-B		0.00	0.00	0.00	No	3	227.87	1	Yes	Yes	0	1.21	234.03	0.97
 0.00	U	Unity		0.00	0.00	0.00	No	1	149.82	1	No	No	0	0.93	154.03	0.97
