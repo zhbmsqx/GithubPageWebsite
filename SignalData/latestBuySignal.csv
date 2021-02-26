@@ -1,5 +1,6 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	KHC	KHC		0.00	0.00	0.00	No	2	36.65	1	Yes	Yes	0	0.64	35.39	1.04
-0.00	DIS	DIS		0.00	0.00	0.00	No	2	187.25	2	Yes	Yes	1	1.11	187.67	1.00
-0.00	CICHY	CICHY		0.00	0.00	0.00	No	2	16.05	2	Yes	Yes	1	0.39	16.13	1.00
+0.00	KHC	KHC		0.00	0.00	0.00	No	2	36.90	1	Yes	Yes	0	0.72	35.39	1.04
+0.00	DIS	DIS		0.00	0.00	0.00	Yes	2	189.53	428	Yes	Yes	2	1.22	187.67	1.01
+0.00	CICHY	CICHY		0.00	0.00	0.00	No	2	16.04	2	Yes	Yes	1	0.50	16.13	0.99
+0.00	GOOG	GOOG		0.00	0.00	0.00	No	3	2057.88	1	Yes	Yes	0	0.65	2098.00	0.98
 0.00	601117	zghx		0.00	0.00	0.00	No	2	6.12	1	Yes	Yes	0	2.28	6.29	0.97
