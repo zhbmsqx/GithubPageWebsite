@@ -1,4 +1,4 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	FB	FB		0.00	0.00	0.00	Yes	2	295.37	429	Yes	No	30	0.45	268.40	1.10
-0.00	^DJI	DOW		0.00	0.00	0.00	No	3	32695.44	2	Yes	Yes	1	10.24	31496.30	1.04
-0.00	^GSPC	SP500		0.00	0.00	0.00	No	2	3941.83	2	Yes	Yes	1	0.22	3943.34	1.00
+0.00	FB	FB		0.00	0.00	0.00	No	2	290.63	20	Yes	No	1	0.56	268.40	1.08
+0.00	^DJI	DOW		0.00	0.00	0.00	No	3	32423.15	1	Yes	Yes	0	20.97	31496.30	1.03
+0.00	^GSPC	SP500		0.00	0.00	0.00	No	2	3910.52	1	Yes	Yes	0	0.28	3943.34	0.99
