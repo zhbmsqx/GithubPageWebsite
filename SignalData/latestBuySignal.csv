@@ -1,3 +1,3 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	QQQ	QQQ		0.00	0.00	0.00	No	2	336.51	1	Yes	Yes	0	0.47	324.57	1.04
-0.00	GOOG	GOOG		0.00	0.00	0.00	No	1	2254.84	1	Yes	Yes	0	0.51	2285.88	0.99
+0.00	QQQ	QQQ		0.00	0.00	0.00	Yes	2	339.70	428	Yes	Yes	1	0.50	324.57	1.05
+0.00	GOOG	GOOG		0.00	0.00	0.00	No	1	2268.74	1	Yes	No	0	0.53	2285.88	0.99
