@@ -1,5 +1,3 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	ASHR	ASHR		0.00	0.00	0.00	No	2	39.01	1	Yes	Yes	0	0.85	39.76	0.98
-0.00	CYB	cyb		0.00	0.00	0.00	No	2	2910.41	1	Yes	Yes	0	0.38	2994.49	0.97
-0.00	SZ	sz		0.00	0.00	0.00	No	2	13933.81	1	Yes	Yes	0	0.43	14351.86	0.97
-0.00	AAPL	AAPL		0.00	0.00	0.00	No	3	130.21	1	Yes	Yes	0	0.90	134.16	0.97
+0.00	ASHR	ASHR		0.00	0.00	0.00	No	3	38.81	1	Yes	Yes	0	0.01	39.76	0.98
+0.00	CYB	cyb		0.00	0.00	0.00	No	3	2921.72	2	Yes	Yes	1	1.01	2994.49	0.98
