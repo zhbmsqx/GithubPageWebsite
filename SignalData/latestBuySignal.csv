@@ -1,5 +1,6 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	CHAU	CHAU		0.00	0.00	0.00	No	1	42.35	12	Yes	Yes	11	0.69	41.90	1.01
+0.00	CHAU	CHAU		0.00	0.00	0.00	No	1	41.98	11	Yes	Yes	1	0.72	41.90	1.00
 0.00	SH	sh		0.00	0.00	0.00	No	1	3486.56	1	Yes	Yes	0	1.06	3490.38	1.00
-0.00	JPM	JPM		0.00	0.00	0.00	No	1	162.56	1	Yes	Yes	0	0.65	164.01	0.99
-0.00	PSQ	PSQ		0.00	0.00	0.00	No	1	13.36	1	No	Yes	0	0.82	13.52	0.99
+0.00	PSQ	PSQ		0.00	0.00	0.00	No	1	13.49	1	No	Yes	0	0.94	13.52	1.00
+0.00	SQQQ	SQQQ		0.00	0.00	0.00	No	1	11.82	1	No	Yes	0	0.82	11.93	0.99
+0.00	JPM	JPM		0.00	0.00	0.00	No	1	162.13	1	Yes	Yes	0	0.70	164.01	0.99
