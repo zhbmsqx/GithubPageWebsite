@@ -1,5 +1,5 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	MSFT	MSFT		0.00	0.00	0.00	No	3	285.01	2	Yes	Yes	1	0.16	280.75	1.02
+0.00	MSFT	MSFT		0.00	0.00	0.00	No	3	286.64	2	Yes	Yes	1	0.21	280.75	1.02
+0.00	AAPL	AAPL		0.00	0.00	0.00	No	3	147.44	2	Yes	Yes	1	0.24	146.39	1.01
+0.00	^DJI	DOW		0.00	0.00	0.00	No	2	35003.10	2	Yes	Yes	1	0.24	35061.55	1.00
 0.00	601390	zgzt		0.00	0.00	0.00	No	2	5.37	2	No	Yes	1	2.43	5.38	1.00
-0.00	AAPL	AAPL		0.00	0.00	0.00	No	3	145.66	1	Yes	Yes	0	0.18	146.39	1.00
-0.00	^DJI	DOW		0.00	0.00	0.00	No	2	34761.87	1	Yes	Yes	0	0.18	35061.55	0.99
