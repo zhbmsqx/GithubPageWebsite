@@ -1,6 +1,6 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	UVXY	UVXY		0.00	0.00	0.00	No	1	22.76	9	No	No	1	1.23	21.18	1.07
-0.00	603017	zhsj		0.00	0.00	0.00	No	3	9.62	2	No	Yes	1	1.00	9.46	1.02
-0.00	CYB	cyb		0.00	0.00	0.00	No	3	3473.37	17	Yes	Yes	1	1.20	3430.14	1.01
-0.00	SZ	sz		0.00	0.00	0.00	No	2	14794.25	16	Yes	Yes	1	1.07	14752.49	1.00
-0.00	600519	maotai		0.00	0.00	0.00	No	1	1932.99	1	No	Yes	0	0.84	1941.01	1.00
+0.00	CYB	cyb		0.00	0.00	0.00	No	3	3466.91	1	Yes	Yes	0	1.21	3430.14	1.01
+0.00	SZ	sz		0.00	0.00	0.00	No	2	14765.56	1	Yes	Yes	0	1.09	14752.49	1.00
+0.00	603017	zhsj		0.00	0.00	0.00	No	3	9.45	2	No	Yes	1	0.94	9.46	1.00
+0.00	600519	maotai		0.00	0.00	0.00	No	1	1934.00	1	No	Yes	0	0.75	1941.01	1.00
+0.00	UVXY	UVXY		0.00	0.00	0.00	No	1	21.09	1	No	No	0	1.29	21.18	1.00
