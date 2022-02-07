@@ -1,5 +1,3 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	RWM	RWM		0.00	0.00	0.00	No	3	23.24	1	Yes	Yes	0	2.46	21.62	1.07
-0.00	CICHY	CICHY		0.00	0.00	0.00	No	3	15.53	31	Yes	Yes	1	0.73	15.15	1.03
-0.00	DOG	DOG		0.00	0.00	0.00	No	2	32.69	1	No	Yes	0	1.84	33.53	0.97
-0.00	601390	zgzt		0.00	0.00	0.00	No	1	6.22	1	Yes	Yes	0	1.61	6.38	0.97
+0.00	601390	zgzt		0.00	0.00	0.00	No	2	6.61	142	Yes	No	134	1.98	6.38	1.04
+0.00	DOG	DOG		0.00	0.00	0.00	No	3	32.70	2	No	Yes	1	0.05	33.53	0.98
