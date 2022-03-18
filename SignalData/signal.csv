@@ -1,3 +1,4 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	BRK-B	BRK-B		0.00	0.00	0.00	Yes	14	340.27	428	Yes	Yes	1	1.25	288.23	1.18
-0.00	CHAD	CHAD		0.00	0.00	0.00	No	10	18.38	1	Yes	Yes	0	8.16	16.71	1.10
+0.00	BRK-B	BRK-B		0.00	0.00	0.00	Yes	14	342.42	428	Yes	No	1	1.33	288.23	1.19
+0.00	CHAD	CHAD		0.00	0.00	0.00	No	10	18.30	1	Yes	Yes	0	8.24	16.71	1.10
+0.00	KHC	KHC		0.00	0.00	0.00	No	4	37.62	2	No	Yes	1	0.83	38.46	0.98
