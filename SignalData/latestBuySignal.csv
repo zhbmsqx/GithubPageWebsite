@@ -1,7 +1,7 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	CHAU	CHAU		0.00	0.00	0.00	No	3	26.57	1	No	Yes	0	0.18	24.75	1.07
-0.00	YINN	YINN		0.00	0.00	0.00	No	3	87.07	2	No	Yes	1	0.21	83.94	1.04
-0.00	ASHR	ASHR		0.00	0.00	0.00	No	2	32.24	1	No	Yes	0	0.46	31.52	1.02
+0.00	CHAU	CHAU		0.00	0.00	0.00	No	3	26.67	1	No	Yes	0	0.25	24.75	1.08
+0.00	YINN	YINN		0.00	0.00	0.00	No	3	87.53	2	No	Yes	1	0.27	83.94	1.04
+0.00	ASHR	ASHR		0.00	0.00	0.00	No	2	32.35	1	No	Yes	0	0.54	31.52	1.03
 0.00	SH	sh		0.00	0.00	0.00	No	3	3267.20	1	No	Yes	0	1.12	3195.46	1.02
 0.00	600519	maotai		0.00	0.00	0.00	No	2	1936.00	1	Yes	Yes	0	0.80	1900.60	1.02
 0.00	SZ	sz		0.00	0.00	0.00	No	2	12246.55	1	No	Yes	0	1.14	12035.15	1.02
@@ -10,4 +10,4 @@ H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	S
 0.00	SZ50	sz50		0.00	0.00	0.00	No	2	2892.29	1	No	Yes	0	1.65	2899.58	1.00
 0.00	601318	pingan		0.00	0.00	0.00	No	1	45.40	1	No	Yes	0	1.06	45.54	1.00
 0.00	601766	zgzc		0.00	0.00	0.00	No	1	5.12	1	No	Yes	0	0.81	5.17	0.99
-0.00	RWM	RWM		0.00	0.00	0.00	No	1	26.47	1	Yes	No	0	0.21	26.76	0.99
+0.00	RWM	RWM		0.00	0.00	0.00	No	1	26.31	1	Yes	Yes	0	0.25	26.76	0.98
