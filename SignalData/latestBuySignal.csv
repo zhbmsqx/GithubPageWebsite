@@ -1,6 +1,5 @@
 H	Code	Name	Industry	pe	pb	PftCmp	AllTimeHigh	SignalSince	Close	WeeksHigh	GT54	SuperBuy	BreakOutRate	VolRate	SBuy	SGain
-0.00	000002	wk		0.00	0.00	0.00	No	2	18.50	11	Yes	No	10	1.02	16.80	1.10
-0.00	000651	geli		0.00	0.00	0.00	No	2	35.10	30	Yes	No	1	0.91	33.02	1.06
-0.00	601318	pingan		0.00	0.00	0.00	No	3	45.09	10	No	Yes	1	0.81	43.12	1.05
-0.00	CHAD	CHAD		0.00	0.00	0.00	No	2	20.88	19	Yes	Yes	18	4.85	20.20	1.03
-0.00	601766	zgzc		0.00	0.00	0.00	No	1	4.99	1	No	Yes	0	0.66	5.06	0.99
+0.00	000002	wk		0.00	0.00	0.00	No	2	18.00	1	No	No	0	1.10	16.80	1.07
+0.00	000651	geli		0.00	0.00	0.00	No	2	34.59	1	Yes	No	0	0.95	33.02	1.05
+0.00	CHAD	CHAD		0.00	0.00	0.00	No	2	20.88	19	Yes	Yes	18	4.90	20.20	1.03
+0.00	601318	pingan		0.00	0.00	0.00	No	3	43.93	1	No	Yes	0	0.93	43.12	1.02
